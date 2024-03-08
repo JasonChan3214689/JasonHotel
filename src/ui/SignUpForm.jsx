@@ -63,15 +63,19 @@ const SpanWrapper = styled.span`
   color: var(--color-white-300);
 `;
 
-function SignUpForm() {
+function SignUpForm({ onClose }) {
   const { signup, isLoading } = useSignup();
-  const { register, getValues, handleSubmit, reset } = useForm();
+  const { register, getValues, handleSubmit } = useForm();
 
   function onSumbit({ fullName, email, password }) {
     signup(
       { fullName, email, password },
       {
-        onSettled: () => reset,
+        onSuccess: () => {
+          if (onClose) {
+            onClose();
+          }
+        },
       }
     );
   }

@@ -12,7 +12,7 @@ export function useLogin() {
     onSuccess: (user) => {
       console.log(user);
       queryClient.setQueryData(["user"], user.user);
-      toast.success("Loin Success");
+      toast.success("登入成功!");
     },
     onError: (err) => {
       toast.error("Provided email or password incorrect");

@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { useForm } from "react-hook-form";
 import { useLogin } from "../hooks/user/useLogin";
+import { useUser } from "../hooks/user/useUser";
 
 const FormContainer = styled.div`
   display: flex;
@@ -64,9 +65,11 @@ const SpanWrapper = styled.span`
 
 const LogInForm = ({ onClose }) => {
   const { login, isLoading } = useLogin();
+  const { refetchUser } = useUser();
   const { register, handleSubmit, reset } = useForm();
 
   function onSumbit({ email, password }) {
+    if (!login || !password) return;
     login(
       { email, password },
       {
@@ -74,6 +77,7 @@ const LogInForm = ({ onClose }) => {
           if (onClose) {
             onClose();
           }
+          refetchUser();
           //onSettled: () => reset,
         },
       }
@@ -90,6 +94,7 @@ const LogInForm = ({ onClose }) => {
           <Input
             type="email"
             name="email"
+            value="aa4321aa456@gmail.com"
             placeholder="電子郵件"
             {...register("email", {
               required: "This field is required",
@@ -102,6 +107,7 @@ const LogInForm = ({ onClose }) => {
           <Input
             type="password"
             name="password"
+            value="12345678"
             placeholder="密碼"
             {...register("password", {
               required: "This field is required",
