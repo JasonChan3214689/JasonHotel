@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { useForm } from "react-hook-form";
-import { useLogin } from "../hooks/user/useLogin";
-import { useUser } from "../hooks/user/useUser";
+import { useLogin } from "../../hooks/user/useLogin";
+import { useUser } from "../../hooks/user/useUser";
 
 const FormContainer = styled.div`
   display: flex;

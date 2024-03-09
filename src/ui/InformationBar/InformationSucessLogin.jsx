@@ -21,6 +21,7 @@ const StyleInformationBaritem = styled.li`
 
 const InformationSucessLogin = ({ user }) => {
   const { logout } = useLogout();
+  console.log(user);
 
   return (
     <>

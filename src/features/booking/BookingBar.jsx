@@ -1,9 +1,12 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import styled from "styled-components";
-import Button from "./Button";
+import Button from "../../ui/Button";
 import { HiOutlineCalendar } from "react-icons/hi2";
+import { useNavigate, useSearchParams } from "react-router-dom";
+import { getToday } from "../../utils/helper";
+import { addDays, format, differenceInCalendarDays } from "date-fns";
 
 const BookingBarContainer = styled.div`
   width: 100vw;
@@ -60,10 +63,31 @@ const StyleHotelContent = styled.span`
 `;
 
 const BookingBar = () => {
-  const [startDate, setStartDate] = useState(new Date());
-  const [endDate, setEndDate] = useState(new Date());
+  const [startDate, setStartDate] = useState(getToday());
+  const [endDate, setEndDate] = useState(null);
   const [adults, setAdults] = useState(1);
   const [children, setChildren] = useState(0);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (startDate) {
+      setEndDate(addDays(startDate, 1));
+    }
+  }, [startDate]);
+
+  function handleClick(event) {
+    event.preventDefault();
+
+    const queryParams = new URLSearchParams({
+      startDate: format(new Date(startDate), "yyyy-MM-dd"),
+      endDate: format(new Date(endDate), "yyyy-MM-dd"),
+      adults: adults.toString(),
+      children: children.toString(),
+      numNights: differenceInCalendarDays(endDate, startDate),
+    });
+
+    navigate(`/bookings?${queryParams}`);
+  }
 
   return (
     <>
@@ -93,7 +117,7 @@ const BookingBar = () => {
                 selectsEnd
                 startDate={startDate}
                 endDate={endDate}
-                minDate={startDate}
+                minDate={addDays(startDate, 1)}
                 onChange={(date) => setEndDate(date)}
               />
             </StyledLabel>
@@ -120,7 +144,7 @@ const BookingBar = () => {
             </StyledLabel>
 
             <StyledButtonContainer>
-              <Button>查看客房預訂情況 </Button>
+              <Button onClick={handleClick}>查看客房預訂情況 </Button>
             </StyledButtonContainer>
           </StyledForm>
         </StyledBookingBarWrapper>

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { useSignup } from "../hooks/user/useSignUp";
+import { useSignup } from "../../hooks/user/useSignUp";
 import { useForm } from "react-hook-form";
 
 const FormContainer = styled.div`
@@ -63,71 +63,93 @@ const SpanWrapper = styled.span`
   color: var(--color-white-300);
 `;
 
+const SpanErrorWrapper = styled.span`
+  text-align: center;
+  font-size: 0.8rem;
+  color: red;
+`;
+
 function SignUpForm({ onClose }) {
   const { signup, isLoading } = useSignup();
-  const { register, getValues, handleSubmit } = useForm();
+  const {
+    register,
+    handleSubmit,
+    getValues,
+    formState: { errors },
+  } = useForm();
 
-  function onSumbit({ fullName, email, password }) {
-    signup(
-      { fullName, email, password },
-      {
-        onSuccess: () => {
-          if (onClose) {
-            onClose();
-          }
-        },
-      }
-    );
+  function onSumbit(data) {
+    signup(data, {
+      onSuccess: () => {
+        if (onClose) {
+          onClose();
+        }
+      },
+    });
   }
 
   return (
     <FormContainer>
       <HotelIconWrapper>
-        <img src="logo-light.png"></img>
+        <img src="logo-light.png" alt="Hotel Logo"></img>{" "}
       </HotelIconWrapper>
       <Title>請輸入以下的資料</Title>
       <Form onSubmit={handleSubmit(onSumbit)}>
         <Input
           type="text"
-          name="FullName"
           placeholder="姓名 *"
           {...register("fullName", { required: "This field is required" })}
         />
+        {errors.fullName && (
+          <SpanErrorWrapper>{errors.fullName.message}</SpanErrorWrapper>
+        )}
+
         <Input
           type="email"
-          name="email"
           placeholder="電子郵件 *"
           {...register("email", {
             required: "This field is required",
             pattern: {
               value: /\S+@\S+\.\S+/,
-              message: "Please provid a valid email address",
+              message: "請提供正確的電子鄱件",
             },
           })}
         />
+        {errors.email && (
+          <SpanErrorWrapper>{errors.email.message}</SpanErrorWrapper>
+        )}
+
         <Input
           type="password"
-          name="password"
           placeholder="密碼 *"
           {...register("password", {
             required: "This field is required",
             minLength: {
               value: 8,
-              message: "Password need a minimum of 8 characters",
+              message: "密碼至少要八字符長度",
             },
           })}
         />
+        {errors.password && (
+          <SpanErrorWrapper>{errors.password.message}</SpanErrorWrapper>
+        )}
+
         <Input
           type="password"
-          name="password"
           placeholder="確認密碼 *"
           {...register("passwordConfirm", {
             required: "This field is required",
             validate: (value) =>
-              value === getValues().password || "Passwords need to match",
+              value === getValues().password || "密碼並不一致",
           })}
         />
-        <Button type="submit">註冊</Button>
+        {errors.passwordConfirm && (
+          <SpanErrorWrapper>{errors.passwordConfirm.message}</SpanErrorWrapper>
+        )}
+
+        <Button type="submit" disabled={isLoading}>
+          註冊
+        </Button>
         <SpanWrapper>*為必須欄位</SpanWrapper>
       </Form>
     </FormContainer>

@@ -1,5 +1,5 @@
 import React from "react";
-import BookingBar from "../ui/BookingBar";
+import BookingBar from "../features/booking/BookingBar";
 import HomepageContent from "../ui/homePageContent/HomepageContent";
 
 const Homepage = () => {

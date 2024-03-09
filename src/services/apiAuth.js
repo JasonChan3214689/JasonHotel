@@ -18,7 +18,7 @@ export async function signup({ fullName, email, password }) {
   if (error) throw new Error(error.message);
 
   let authError = null;
-
+  /* 
   if (data?.user && !data.user?.identities.length) {
     authError = {
       name: "AuthApiError",
@@ -29,11 +29,28 @@ export async function signup({ fullName, email, password }) {
       name: error.name,
       message: error.message,
     };
-  }
+  } */
 
   if (authError) throw new Error(authError.message);
 
-  return data;
+  const userId = data.user.id;
+
+  const { data2, error2 } = await supabase
+    .from("guests")
+    .insert([
+      {
+        fullName: fullName,
+        email: email,
+        nationality: "HongKong",
+        countryFlag: "https://flagcdn.com/hk.svg",
+        userId: userId,
+      },
+    ])
+    .single();
+
+  if (error2) throw new Error(error2.message);
+
+  return data, data2;
 }
 
 export async function login({ email, password }) {

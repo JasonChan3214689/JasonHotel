@@ -1,8 +1,8 @@
 import styled from "styled-components";
 
 import Modal from "../Modal";
-import SignUpForm from "../../ui/SignUpForm";
-import LoginForm from "../../ui/LogInForm";
+import SignUpForm from "../../features/auth/SignUpForm";
+import LoginForm from "../../features/auth/LogInForm";
 import { useUser } from "../../hooks/user/useUser";
 import { useLogout } from "../../hooks/user/useLogout";
 import InformationSucessLogin from "./InformationSucessLogin";
@@ -34,6 +34,8 @@ const StyleInformationBaritem = styled.li`
 const InformationBarList = () => {
   const { user } = useUser();
   const { logout } = useLogout();
+
+  console.log(user);
 
   return (
     <>

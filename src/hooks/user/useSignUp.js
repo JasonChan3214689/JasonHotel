@@ -9,6 +9,9 @@ export function useSignup() {
       console.log(user);
       toast.success("註冊成功，我們會稍後郵寄一封確認郵件給你，請留意收信~");
     },
+    onError: (err) => {
+      toast.error("User already registered");
+    },
   });
 
   return { signup, isLoading };
