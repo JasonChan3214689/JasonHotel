@@ -10,4 +10,5 @@ const device = {
   large: `(min-width: ${size.large})`,
 };
 
-export { size, device };
+const MAX_PEOPLE = 6;
+export { size, device, MAX_PEOPLE };

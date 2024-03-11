@@ -26,7 +26,9 @@ const NavbarContact = () => {
   return (
     <StyledNavBarContact>
       <span>聯絡我們</span>
-      <Button variation="primary">預訂客房</Button>
+      <Button variation="primary" size="small">
+        預訂客房
+      </Button>
     </StyledNavBarContact>
   );
 };

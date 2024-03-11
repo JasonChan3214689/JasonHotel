@@ -34,7 +34,7 @@ const GlobalStyles = createGlobalStyle`
     }
 
     --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.04);
-    --shadow-md: 0px 0.6rem 2.4rem rgba(0, 0, 0, 0.06);
+    --shadow-md: 2px 5px 15px 0 rgba(0, 0, 0, 0.5);
     --shadow-lg: 0 2.4rem 3.2rem rgba(0, 0, 0, 0.12);
 
      button {
@@ -46,7 +46,7 @@ const GlobalStyles = createGlobalStyle`
     button,
     textarea,
     select {
-        font: inherit;
+        
         color: inherit;
     }
 

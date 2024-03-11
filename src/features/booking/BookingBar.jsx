@@ -7,6 +7,7 @@ import { HiOutlineCalendar } from "react-icons/hi2";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { getToday } from "../../utils/helper";
 import { addDays, format, differenceInCalendarDays } from "date-fns";
+import { MAX_PEOPLE } from "../../utils/breakpoints";
 
 const BookingBarContainer = styled.div`
   width: 100vw;
@@ -67,6 +68,7 @@ const BookingBar = () => {
   const [endDate, setEndDate] = useState(null);
   const [adults, setAdults] = useState(1);
   const [children, setChildren] = useState(0);
+  const [totalPeople, setTotalPeople] = useState(0);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -74,6 +76,14 @@ const BookingBar = () => {
       setEndDate(addDays(startDate, 1));
     }
   }, [startDate]);
+
+  useEffect(() => {
+    const numAdults = parseInt(adults, 10) || 0;
+    const numChildrens = parseInt(children, 10) || 0;
+    const newTotalPeople = numAdults + numChildrens;
+
+    setTotalPeople(newTotalPeople);
+  }, [adults, children]);
 
   function handleClick(event) {
     event.preventDefault();
@@ -84,10 +94,29 @@ const BookingBar = () => {
       adults: adults.toString(),
       children: children.toString(),
       numNights: differenceInCalendarDays(endDate, startDate),
+      totalPeople: totalPeople.toString(),
     });
 
     navigate(`/bookings?${queryParams}`);
   }
+
+  const handleAdultsChange = (e) => {
+    const newAdultsValue = Math.min(parseInt(e.target.value, 10), MAX_PEOPLE);
+    setAdults(newAdultsValue);
+
+    if (newAdultsValue + children > MAX_PEOPLE) {
+      setChildren(MAX_PEOPLE - newAdultsValue);
+    }
+  };
+
+  const handleChildrenChange = (e) => {
+    const newChildrenValue = Math.min(parseInt(e.target.value, 10), MAX_PEOPLE);
+    setChildren(newChildrenValue);
+
+    if (newChildrenValue + adults > MAX_PEOPLE) {
+      setAdults(MAX_PEOPLE - newChildrenValue);
+    }
+  };
 
   return (
     <>
@@ -123,28 +152,30 @@ const BookingBar = () => {
             </StyledLabel>
 
             <StyledLabel>
-              <span>Adults:</span>
+              <span>成人:</span>
 
               <StyledInput
                 type="number"
                 value={adults}
                 min="1"
-                onChange={(e) => setAdults(e.target.value)}
+                onChange={handleAdultsChange}
               />
             </StyledLabel>
 
             <StyledLabel>
-              <span>Children:</span>
+              <span>小童:</span>
               <StyledInput
                 type="number"
                 value={children}
                 min="0"
-                onChange={(e) => setChildren(e.target.value)}
+                onChange={handleChildrenChange}
               />
             </StyledLabel>
 
             <StyledButtonContainer>
-              <Button onClick={handleClick}>查看客房預訂情況 </Button>
+              <Button size="small" onClick={handleClick}>
+                查看客房預訂情況{" "}
+              </Button>
             </StyledButtonContainer>
           </StyledForm>
         </StyledBookingBarWrapper>
