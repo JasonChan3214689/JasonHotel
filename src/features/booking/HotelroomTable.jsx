@@ -1,4 +1,3 @@
-import React from "react";
 import { useSearchParams } from "react-router-dom";
 import { useHotelroom } from "../../hooks/hotelroom/useHotelroom";
 import HotelroomCard from "./HotelroomCard";

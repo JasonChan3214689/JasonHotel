@@ -7,6 +7,59 @@ import Button from "../../ui/Button";
 import { useForm } from "react-hook-form";
 import useBooking from "../../hooks/booking/useBooking";
 import Spinner from "../../ui/Spinner";
+import styled from "styled-components";
+
+const StyledBookingFormWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  font-size: 1.1rem;
+  margin: 0.5rem;
+`;
+
+const StyledBookingFormTitle = styled.div`
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--color-gold-600);
+`;
+
+const StyledBookingFormInfoWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  font-size: 1.1rem;
+  margin: 0.5rem;
+`;
+
+const StyledBookingFormUserInfoWrapper = styled.div`
+  margin: 0.5rem;
+  input {
+    width: 100%;
+  }
+`;
+
+const StyledBookingFormBreafastWarpper = styled.div`
+  input {
+    width: auto;
+  }
+`;
+
+const StyledFromWrapper = styled.form`
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+`;
+
+const StyledExtractPrice = styled.div`
+  margin-top: -0.5rem;
+  font-size: 0.8rem;
+  font-weight: 100;
+`;
+
+const SpanErrorWrapper = styled.span`
+  text-align: center;
+  font-size: 0.8rem;
+  color: red;
+`;
 
 const BookingForm = ({ hotelroom, onClose }) => {
   const [isBreakfast, setIsBreakfast] = useState(false);
@@ -28,7 +81,11 @@ const BookingForm = ({ hotelroom, onClose }) => {
   const userfullName = user.user_metadata.fullName;
   const userEmail = guests?.at(0).email;
 
-  const { register, handleSubmit } = useForm();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
 
   const roomPrice = hotelroom.discount * numNights;
   const breakfastPrice = isBreakfast ? 40 * numNights : 0;
@@ -75,21 +132,19 @@ const BookingForm = ({ hotelroom, onClose }) => {
   }
 
   return (
-    <>
-      <div>你所選購的:</div>
-      <div>
+    <StyledBookingFormWrapper>
+      <StyledBookingFormTitle>你所選購的:</StyledBookingFormTitle>
+      <StyledBookingFormInfoWrapper>
         {hotelroom.name}
         <img src={hotelroom.image} alt="hotel room"></img>
         <div>入住時間: {startDate}</div>
         <div>入住時間: {endDate}</div>
         <div>入住天數: {numNights} 天</div>
         <div>總人數: {totalPeople} 人</div>
-        <div>總需付: {totalPrice}</div>
-        <div>平址每日:{averagePrice} </div>
         <hr></hr>
-      </div>
-      <div>
-        <form onSubmit={handleSubmit(onSubmit)}>
+      </StyledBookingFormInfoWrapper>
+      <StyledBookingFormUserInfoWrapper>
+        <StyledFromWrapper onSubmit={handleSubmit(onSubmit)}>
           <div>你的入住資料:</div>
           <div>
             <label>姓名:</label>
@@ -101,6 +156,9 @@ const BookingForm = ({ hotelroom, onClose }) => {
                 required: "請輸入資料",
               })}
             />
+            {errors.userfullName && (
+              <SpanErrorWrapper>{errors.fullName.message}</SpanErrorWrapper>
+            )}
           </div>
           <div>
             <label>電話:</label>
@@ -111,6 +169,9 @@ const BookingForm = ({ hotelroom, onClose }) => {
                 required: "請輸入資料 ",
               })}
             />
+            {errors.phoneNumber && (
+              <SpanErrorWrapper>{errors.phoneNumber.message}</SpanErrorWrapper>
+            )}
           </div>
           <div>
             <label>電郵地址:</label>
@@ -126,23 +187,30 @@ const BookingForm = ({ hotelroom, onClose }) => {
                 },
               })}
             />
+            {errors.email && (
+              <SpanErrorWrapper>{errors.email.message}</SpanErrorWrapper>
+            )}
           </div>
-          <div>
+          <StyledBookingFormBreafastWarpper>
             <label>需要我們提供早餐嗎?</label>
             <input
               type="checkbox"
               id="breakfast"
               onChange={(e) => setIsBreakfast(e.target.checked)}
             />
-          </div>
-          <div>(每天需多付40元HKD)</div>
+          </StyledBookingFormBreafastWarpper>
+          <StyledExtractPrice>(每天需多付40元HKD)</StyledExtractPrice>
           <hr></hr>
           <div>付款方式:</div>
           <div>很抱歉，我們現在只支援現金付款方式</div>
+
+          <hr></hr>
+          <div>總需付: {totalPrice}</div>
+          <div>平址每日:{averagePrice} </div>
           <Button type="submit">預訂</Button>
-        </form>
-      </div>
-    </>
+        </StyledFromWrapper>
+      </StyledBookingFormUserInfoWrapper>
+    </StyledBookingFormWrapper>
   );
 };
 

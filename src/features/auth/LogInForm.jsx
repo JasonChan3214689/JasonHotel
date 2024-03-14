@@ -94,7 +94,7 @@ const LogInForm = ({ onClose }) => {
           <Input
             type="email"
             name="email"
-            value="aa4321aa456@gmail.com"
+            value="sumlunchan999@gmail.com"
             placeholder="電子郵件"
             {...register("email", {
               required: "This field is required",

@@ -10,3 +10,16 @@ export async function createBooking(newBooking) {
   }
   return data;
 }
+
+export async function getBooking(guestId) {
+  const { data, error } = await supabase
+    .from("bookings")
+    .select("*")
+    .eq("guestId", guestId);
+
+  if (error) {
+    console.error(error);
+    throw new Error("Booking could not be find");
+  }
+  return data;
+}

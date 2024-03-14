@@ -6,6 +6,7 @@ import LoginForm from "../../features/auth/LogInForm";
 import { useUser } from "../../hooks/user/useUser";
 import { useLogout } from "../../hooks/user/useLogout";
 import InformationSucessLogin from "./InformationSucessLogin";
+import { useNavigate } from "react-router-dom";
 
 const StyleInformationBarList = styled.ul`
   padding-right: 2rem;
@@ -35,8 +36,6 @@ const InformationBarList = () => {
   const { user } = useUser();
   const { logout } = useLogout();
 
-  console.log(user);
-
   return (
     <>
       <StyleInformationBarList>
@@ -63,8 +62,6 @@ const InformationBarList = () => {
             </Modal>
           </>
         )}
-
-        <StyleInformationBaritem as="li">查詢預約</StyleInformationBaritem>
       </StyleInformationBarList>
     </>
   );

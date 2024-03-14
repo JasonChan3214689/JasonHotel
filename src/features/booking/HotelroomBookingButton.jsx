@@ -12,7 +12,7 @@ const HotelroomBookingButton = ({ hotelroom }) => {
   return (
     <BookingModal>
       <BookingModal.Open opens="booking">
-        <Button variant="primary" size="large">
+        <Button variant="primary" size="small">
           立即訂購
         </Button>
       </BookingModal.Open>

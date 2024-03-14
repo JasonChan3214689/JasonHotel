@@ -5,12 +5,12 @@ import { createContext } from "react";
 import { useState } from "react";
 import { useContext } from "react";
 import { cloneElement } from "react";
+import { device, size } from "../utils/breakpoints";
 
 const StyledModal = styled.div`
   position: fixed;
   top: 0;
   right: 0;
-  width: 20%;
   height: 100vh;
   background-color: var(--color-white-600);
   box-shadow: var(--shadow-lg);
@@ -18,6 +18,18 @@ const StyledModal = styled.div`
   transition: all 0.5s;
   z-index: 1001;
   overflow-y: auto;
+
+  @media ${device.small} {
+    width: 60%;
+  }
+
+  @media ${device.med} {
+    width: 50%;
+  }
+
+  @media ${device.large} {
+    width: 25%;
+  }
 `;
 
 const Overlay = styled.div`

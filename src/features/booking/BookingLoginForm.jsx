@@ -110,7 +110,7 @@ const BookingLoginForm = ({ onClose }) => {
           <Input
             type="email"
             name="email"
-            defaultValue="aa4321aa456@gmail.com"
+            defaultValue="sumlunchan999@gmail.com"
             placeholder="電子郵件"
             {...register("email", {
               required: "This field is required",
