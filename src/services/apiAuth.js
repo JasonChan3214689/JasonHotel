@@ -79,6 +79,20 @@ export async function getCurrentUser() {
   return data?.user;
 }
 
+export async function getCurrentGuests(id) {
+  const { data, error } = await supabase
+    .from("guests")
+    .select("*")
+    .eq("userId", id);
+
+  if (error) {
+    console.error(error);
+    throw new Error("guests could not be loaded");
+  }
+
+  return data;
+}
+
 export async function logout() {
   const { error } = await supabase.auth.signOut();
   if (error) throw new Error(error.message);

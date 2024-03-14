@@ -26,11 +26,12 @@ const GlobalStyles = createGlobalStyle`
 
     body {
     font-family: "Noto Serif TC", serif;
-
+    overflow-x: hidden;
     transition: color 0.3s, background-color 0.3s;
     min-height: 100vh;
     line-height: 1.5;
     font-size: 1.6rem;
+    
     }
 
     --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.04);

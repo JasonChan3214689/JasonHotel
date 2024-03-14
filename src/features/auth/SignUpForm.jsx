@@ -24,7 +24,7 @@ const Input = styled.input`
   border-radius: 2px;
 
   &::placeholder {
-    font-size: 1.2rem;
+    font-size: 0.8rem;
   }
 `;
 

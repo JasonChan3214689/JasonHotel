@@ -2,6 +2,8 @@ import styled from "styled-components";
 import { useForm } from "react-hook-form";
 import { useLogin } from "../../hooks/user/useLogin";
 import { useUser } from "../../hooks/user/useUser";
+import BookingModal from "../../ui/BookingModal";
+import SignUpForm from "../auth/SignUpForm";
 
 const FormContainer = styled.div`
   display: flex;
@@ -41,6 +43,20 @@ const Button = styled.button`
   }
 `;
 
+const RegisterButton = styled.button`
+  width: 90%;
+  padding: 10px 15px;
+  background-color: var(--color-gold-300);
+
+  border: none;
+  cursor: pointer;
+  margin-bottom: 15px;
+
+  &:hover {
+    background-color: var(--color-gold-600);
+  }
+`;
+
 const Title = styled.h6`
   margin-bottom: 10px;
   color: var(--color-gold-300);
@@ -63,7 +79,7 @@ const SpanWrapper = styled.span`
   color: var(--color-white-300);
 `;
 
-const LogInForm = ({ onClose }) => {
+const BookingLoginForm = ({ onClose }) => {
   const { login, isLoading } = useLogin();
   const { refetchUser } = useUser();
   const { register, handleSubmit, reset } = useForm();
@@ -89,12 +105,12 @@ const LogInForm = ({ onClose }) => {
         <HotelIconWrapper>
           <img src="logo-light.png"></img>
         </HotelIconWrapper>
-        <Title>請輸入以下資料</Title>
+        <Title>請先登入再作預訂房間</Title>
         <Form onSubmit={handleSubmit(onSumbit)}>
           <Input
             type="email"
             name="email"
-            value="aa4321aa456@gmail.com"
+            defaultValue="aa4321aa456@gmail.com"
             placeholder="電子郵件"
             {...register("email", {
               required: "This field is required",
@@ -120,9 +136,18 @@ const LogInForm = ({ onClose }) => {
 
           <Button type="submit">登入</Button>
         </Form>
+
+        <BookingModal>
+          <BookingModal.Open opens="bookingRegister">
+            <RegisterButton>按此註冊</RegisterButton>
+          </BookingModal.Open>
+          <BookingModal.Window name="bookingRegister">
+            <SignUpForm onClose={() => BookingModal.close()} />
+          </BookingModal.Window>
+        </BookingModal>
       </FormContainer>
     </div>
   );
 };
 
-export default LogInForm;
+export default BookingLoginForm;

@@ -4,20 +4,28 @@ import "react-datepicker/dist/react-datepicker.css";
 import styled from "styled-components";
 import Button from "../../ui/Button";
 import { HiOutlineCalendar } from "react-icons/hi2";
-import { useNavigate, useSearchParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { getToday } from "../../utils/helper";
 import { addDays, format, differenceInCalendarDays } from "date-fns";
-import { MAX_PEOPLE } from "../../utils/breakpoints";
+import { MAX_PEOPLE, device, size } from "../../utils/breakpoints";
 
 const BookingBarContainer = styled.div`
-  width: 100vw;
+  width: 100%;
   height: 120px;
   position: relative;
-  left: 50%;
-  right: 50%;
-  margin-left: -50vw;
-  margin-right: -50vw;
   background-color: var(--color-white-600);
+
+  @media ${device.small} {
+    height: auto; /* 或者其它适合小屏幕的样式 */
+  }
+
+  @media ${device.med} {
+    height: auto; /* 适合中等屏幕的样式 */
+  }
+
+  @media ${device.large} {
+    height: 120px; /* 适合大屏幕的样式 */
+  }
 `;
 
 const StyledBookingBarWrapper = styled.div`
@@ -31,6 +39,15 @@ const StyledBookingBarWrapper = styled.div`
   padding: 1rem !important;
   flex-wrap: wrap;
   transform: translate(-2%, -1rem);
+
+  @media (max-width: ${size.med}) {
+    flex-wrap: nowrap;
+    padding: 1rem !important;
+  }
+
+  @media (max-width: ${size.small}) {
+    display: none;
+  }
 `;
 
 const StyledForm = styled.form`
@@ -38,6 +55,10 @@ const StyledForm = styled.form`
   align-items: center;
   flex-wrap: wrap;
   font-size: 0.8rem;
+
+  @media ${device.small} {
+    font-size: 0.7rem;
+  }
 `;
 
 const StyledLabel = styled.label`
@@ -49,6 +70,10 @@ const StyledLabel = styled.label`
 const StyledInput = styled.input`
   margin-top: 0.25rem;
   width: 80px;
+
+  @media ${device.small} {
+    width: 80px;
+  }
 `;
 
 const StyledButtonContainer = styled.div`
