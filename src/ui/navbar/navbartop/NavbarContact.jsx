@@ -1,10 +1,27 @@
 import styled from "styled-components";
 import Button from "../../Button";
+import { useState } from "react";
+import BookingMenuForm from "../../../features/booking/BookingMenuForm";
 
 const StyledNavBarContact = styled.div`
   position: absolute;
   right: 0;
   font-size: 1rem;
+  z-index: 10;
+
+  .menu-content {
+    position: absolute;
+    right: 0;
+    top: 100%;
+    background-color: white;
+    border: 1px solid #ccc;
+    padding: 10px;
+    display: none;
+  }
+
+  .menu-content.open {
+    display: block;
+  }
 
   span {
     color: white;
@@ -23,14 +40,13 @@ const StyledNavBarContact = styled.div`
 `;
 
 const NavbarContact = () => {
-  return (
-    <StyledNavBarContact>
-      <span>聯絡我們</span>
-      <Button variation="primary" size="small">
-        預訂客房
-      </Button>
-    </StyledNavBarContact>
-  );
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
+
+  return <StyledNavBarContact></StyledNavBarContact>;
 };
 
 export default NavbarContact;

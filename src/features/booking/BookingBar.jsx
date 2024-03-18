@@ -15,16 +15,8 @@ const BookingBarContainer = styled.div`
   position: relative;
   background-color: var(--color-white-600);
 
-  @media ${device.small} {
-    height: auto; /* 或者其它适合小屏幕的样式 */
-  }
-
-  @media ${device.med} {
-    height: auto; /* 适合中等屏幕的样式 */
-  }
-
-  @media ${device.large} {
-    height: 120px; /* 适合大屏幕的样式 */
+  @media (max-width: 600px) {
+    height: 330px;
   }
 `;
 
@@ -40,52 +32,73 @@ const StyledBookingBarWrapper = styled.div`
   flex-wrap: wrap;
   transform: translate(-2%, -1rem);
 
-  @media (max-width: ${size.med}) {
-    flex-wrap: nowrap;
-    padding: 1rem !important;
+  @media (max-width: 600px) {
+    transform: translate(0, -1rem);
+    padding: 0.5rem !important;
   }
 
-  @media (max-width: ${size.small}) {
-    display: none;
+  @media (max-width: 600px) {
+    flex-direction: row;
+    padding: 0.75rem !important;
   }
 `;
 
 const StyledForm = styled.form`
   display: flex;
-  align-items: center;
-  flex-wrap: wrap;
+  gap: 2rem;
   font-size: 0.8rem;
+  align-items: center;
 
-  @media ${device.small} {
-    font-size: 0.7rem;
+  @media (max-width: 600px) {
+    flex-direction: column;
+    gap: 0rem;
+    align-items: stretch;
   }
 `;
 
 const StyledLabel = styled.label`
   margin-right: 1rem;
+  margin-bottom: 0.5rem;
   display: flex;
   flex-direction: column;
 `;
 
 const StyledInput = styled.input`
   margin-top: 0.25rem;
-  width: 80px;
+  width: 20px;
 
-  @media ${device.small} {
-    width: 80px;
+  @media (max-width: 600px) {
+    width: 100%;
   }
 `;
 
 const StyledButtonContainer = styled.div`
   display: flex;
-  align-items: center;
+  flex-direction: row;
+  margin-top: 0.5rem;
+  margin-left: 2rem;
+
+  @media (max-width: 600px) {
+    margin-left: 0rem;
+    flex-basis: 100%;
+    justify-content: center;
+    margin-right: 2rem;
+  }
 `;
 
 const StyleHotelContent = styled.span`
   display: flex;
-  font-size: 0.8rem;
+  font-size: 1rem;
   justify-content: center;
   align-items: center;
+
+  @media (max-width: 600px) {
+    font-size: 0.8rem;
+    text-align: center;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    margin-bottom: 1rem;
+  }
 `;
 
 const BookingBar = () => {
@@ -196,13 +209,12 @@ const BookingBar = () => {
                 onChange={handleChildrenChange}
               />
             </StyledLabel>
-
-            <StyledButtonContainer>
-              <Button size="small" onClick={handleClick}>
-                查看客房預訂情況{" "}
-              </Button>
-            </StyledButtonContainer>
           </StyledForm>
+          <StyledButtonContainer>
+            <Button size="small" onClick={handleClick}>
+              立即預訂{" "}
+            </Button>
+          </StyledButtonContainer>
         </StyledBookingBarWrapper>
         <StyleHotelContent>
           通過官網直接預訂客房即可專享額外優惠，包括靈活安排入住和退房時間並尊享優惠客房價格

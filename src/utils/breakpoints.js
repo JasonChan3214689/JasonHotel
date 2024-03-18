@@ -1,12 +1,12 @@
 const size = {
-  small: "430px",
-  med: "768px",
-  large: "1300px",
+  small: "320px",
+  medium: "768px",
+  large: "1200px",
 };
 
 const device = {
   small: `(min-width: ${size.small})`,
-  med: `(min-width: ${size.med})`,
+  medium: `(min-width: ${size.medium})`,
   large: `(min-width: ${size.large})`,
 };
 

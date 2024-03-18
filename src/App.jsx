@@ -11,6 +11,7 @@ import Restaurant from "./page/Restaurant";
 import ViewBooking from "./page/ViewBooking";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "react-hot-toast";
+import RoomDetail from "./page/RoomDetail";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -32,6 +33,7 @@ function App() {
               <Route index element={<Homepage />} />
               <Route path="homepage" element={<Homepage />} />
               <Route path="bookings" element={<Booking />} />
+              <Route path="roomDetail" element={<RoomDetail />} />
               <Route path="viewbookings" element={<ViewBooking />} />
               <Route path="contactus" element={<Contactus />} />
               <Route path="events" element={<Events />} />

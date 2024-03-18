@@ -5,6 +5,8 @@ import useViewBooking from "../../hooks/useViewBooking/useViewBooking";
 import Spinner from "../../ui/Spinner";
 import ViewRow from "./ViewRow";
 
+import EmptyBookingRecord from "../../ui/EmptyBookingRecord";
+
 const ViewTable = () => {
   const { user, isLoading: userIsLoading } = useUser();
   const { guests, isLoading: guestIsLoading } = useGuest(user?.id);
@@ -14,6 +16,13 @@ const ViewTable = () => {
   if (userIsLoading || guestIsLoading || viewIsLoading) {
     return <Spinner />;
   }
+
+  if (bookingRecord.length === 0)
+    return (
+      <div>
+        <EmptyBookingRecord />
+      </div>
+    );
 
   return (
     <div>

@@ -17,7 +17,6 @@ const NavbarTop = () => {
   return (
     <StyledNavBarTop>
       <NavbarHotelIcon />
-      <NavbarContact />
     </StyledNavBarTop>
   );
 };

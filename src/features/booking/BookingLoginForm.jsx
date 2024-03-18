@@ -44,7 +44,7 @@ const Button = styled.button`
 `;
 
 const RegisterButton = styled.button`
-  width: 90%;
+  width: 66.5%;
   padding: 10px 15px;
   background-color: var(--color-gold-300);
 

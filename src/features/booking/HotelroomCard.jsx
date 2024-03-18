@@ -34,10 +34,18 @@ const HotelroomCard = ({ hotelroom, startDate, endDate, numNights }) => {
           >
             可容納人數: {hotelroom.maxCapacity}
           </Typography>
-          <Typography variant="body2" color="text.secondary">
+          <Typography
+            variant="body2"
+            color="text.secondary"
+            sx={{ display: "flex", marginTop: "1rem", position: "relative" }}
+          >
             {hotelroom.description}
           </Typography>
-          <Typography variant="body2" color="text.secondary">
+          <Typography
+            variant="body2"
+            color="text.secondary"
+            sx={{ display: "flex", marginTop: "1rem" }}
+          >
             {startDate} 至 {endDate} 總 {numNights} 天 可供應
           </Typography>
         </CardContent>
@@ -45,12 +53,23 @@ const HotelroomCard = ({ hotelroom, startDate, endDate, numNights }) => {
           <Typography variant="subtitle1" component="div">
             原價: HKD {hotelroom.regularPrice} / 官網訂購優惠:
           </Typography>
-          <Typography component="div" sx={{ pl: 2, fontWeight: "bold" }}>
-            平均每晚: {hotelDiscountPrice}
-          </Typography>
-          <Typography component="div" sx={{ pl: 2, fontWeight: "bold" }}>
-            總需要: {totalPrice}
-          </Typography>
+          <Box
+            sx={{
+              pl: 2,
+              fontWeight: "bold",
+              position: "absolute",
+              bottom: 0,
+              left: 0,
+              marginBottom: "1rem",
+            }}
+          >
+            <Typography component="div" sx={{ fontWeight: "bold" }}>
+              平均每晚: {hotelDiscountPrice}
+            </Typography>
+            <Typography component="div" sx={{ fontWeight: "bold" }}>
+              總需要: {totalPrice}
+            </Typography>
+          </Box>
         </Box>
         <CardActions sx={{ justifyContent: "flex-end" }}>
           <Button sizes="small" variations="priamy">
