@@ -23,6 +23,12 @@ const StyledContactInromation = styled.div`
   justify-content: center;
   width: 100%;
   gap: 2rem;
+
+  @media (max-width: 600px) {
+    flex-direction: column;
+    padding: 2rem;
+    text-align: center;
+  }
 `;
 
 const HomepagePart5 = () => {

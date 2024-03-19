@@ -37,6 +37,14 @@ const StyledHomePagePart3Content = styled.div`
     max-width: 40%;
     margin: 0 auto;
   }
+
+  @media (max-width: 600px) {
+    margin: 2rem;
+    span {
+      max-width: 80%;
+      font-size: 1.2rem;
+    }
+  }
 `;
 
 const HomepagePart3 = () => {

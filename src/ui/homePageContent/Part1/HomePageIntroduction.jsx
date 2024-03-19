@@ -28,11 +28,11 @@ const StyledHomePagePart1Content = styled.div`
 
   @media (max-width: 600px) {
     margin: 2rem;
-    flex-wrap;
     span {
+      width: 80%;
+      padding: 4rem;
       margin-top: 2rem;
-      font-size: 0.8rem;
-      
+      font-size: 1rem;
     }
   }
 `;

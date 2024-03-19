@@ -43,15 +43,15 @@ const HamburgerMenu = styled.div`
   display: none;
   position: absolute;
   right: 0;
-  top: 5%;
+  top: 4%;
   background-color: var(--color-gold-600);
   padding: 1rem;
-  border-radius: 8px;
   z-index: 100;
   font-size: 1.5rem;
 
   @media (max-width: 768px) {
     display: block;
+    font-size: 1rem;
   }
 `;
 

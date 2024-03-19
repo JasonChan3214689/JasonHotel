@@ -25,6 +25,10 @@ const StyledRestaurantImageWrapper = styled.div`
   img {
     width: 100%;
   }
+
+  @media (max-width: 600px) {
+    width: 100%;
+  }
 `;
 
 const StyledRestaurantInfoWrapper = styled.div`
@@ -41,6 +45,18 @@ const StyledRestaurantInfoWrapper = styled.div`
 
   span {
     margin-top: 1rem;
+  }
+
+  @media (max-width: 600px) {
+    width: 100%;
+    top: 0%;
+    right: -0%;
+    display: block;
+    padding: 3rem;
+  }
+
+  span {
+    font-size: 0.9rem;
   }
 `;
 

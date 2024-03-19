@@ -33,13 +33,9 @@ const StyledBookingBarWrapper = styled.div`
   transform: translate(-2%, -1rem);
 
   @media (max-width: 600px) {
-    transform: translate(0, -1rem);
-    padding: 0.5rem !important;
-  }
-
-  @media (max-width: 600px) {
     flex-direction: row;
-    padding: 0.75rem !important;
+    transform: translate(0, -1rem);
+    padding: 1.5rem !important;
   }
 `;
 
@@ -65,7 +61,7 @@ const StyledLabel = styled.label`
 
 const StyledInput = styled.input`
   margin-top: 0.25rem;
-  width: 20px;
+  width: 50px;
 
   @media (max-width: 600px) {
     width: 100%;

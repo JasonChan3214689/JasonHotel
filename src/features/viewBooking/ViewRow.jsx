@@ -7,11 +7,12 @@ import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import IconButton from "@mui/material/IconButton";
 import DeleteIcon from "@mui/icons-material/Delete";
-import { Box } from "@mui/material";
+import { Box, useMediaQuery } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 
 const ViewRow = ({ record, onDelete }) => {
   const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
   const startDate = formatDate(record.startDate);
   const endDate = formatDate(record.endDate);
   const createDate = formatDate(record.created_at);
@@ -24,12 +25,16 @@ const ViewRow = ({ record, onDelete }) => {
         margin: "2rem",
         display: "flex",
         marginBottom: theme.spacing(2),
+        flexDirection: isMobile ? "column" : "row",
         overflow: "hidden",
       }}
     >
       <CardMedia
         component="img"
-        sx={{ width: "300px", height: "100%" }}
+        sx={{
+          width: isMobile ? "100%" : "300px",
+          height: isMobile ? "200px" : "100%",
+        }}
         image={bookingHotelRoom?.at(0).image}
         alt={bookingHotelRoom?.at(0).name}
       />
@@ -43,7 +48,7 @@ const ViewRow = ({ record, onDelete }) => {
           >
             {bookingHotelRoom?.at(0)?.name}
           </Typography>
-          <Box sx={{ display: "flex", width: "100%", gap: "2rem" }}>
+          <Box sx={{ display: "flex", flexDirection: "column", width: "100%" }}>
             <Typography
               variant="subtitle1"
               color="text.secondary"
@@ -99,14 +104,6 @@ const ViewRow = ({ record, onDelete }) => {
           >
             總付款金額: {totalPrice}
           </Typography>
-          <IconButton
-            aria-label="delete"
-            onClick={() => {
-              onDelete(record.id);
-            }}
-          >
-            <DeleteIcon />
-          </IconButton>
         </Box>
       </Box>
     </Card>

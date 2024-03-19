@@ -19,16 +19,9 @@ const StyledModal = styled.div`
   z-index: 1001;
   overflow-y: auto;
 
-  @media ${device.small} {
-    width: 60%;
-  }
-
-  @media ${device.med} {
-    width: 50%;
-  }
-
-  @media ${device.large} {
-    width: 25%;
+  @media (max-width: 600px) {
+    width: 80%;
+    padding: 2rem 2rem;
   }
 `;
 

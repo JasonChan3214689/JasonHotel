@@ -15,6 +15,15 @@ const StyledFooterContent = styled.div`
   padding: 2rem;
   gap: 15rem;
   color: var(--color-gold-300);
+
+  @media (max-width: 600px) {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 2rem;
+    font-size: 1rem;
+    padding: 2rem;
+    padding-left: 7rem;
+  }
 `;
 
 const StyledFooterInfo = styled.div``;

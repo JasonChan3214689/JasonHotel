@@ -1,5 +1,3 @@
-import React from "react";
-import CssBaseline from "@mui/material/CssBaseline";
 import {
   Card,
   CardContent,
@@ -7,6 +5,8 @@ import {
   Typography,
   Box,
   CardActions,
+  useTheme,
+  useMediaQuery,
 } from "@mui/material";
 import { formatCurrency } from "../../utils/helper";
 import HotelroomBookingButton from "./HotelroomBookingButton";
@@ -15,9 +15,18 @@ import Button from "../../ui/Button";
 const HotelroomCard = ({ hotelroom, startDate, endDate, numNights }) => {
   const hotelDiscountPrice = formatCurrency(hotelroom.discount);
   const totalPrice = formatCurrency(hotelroom.discount * numNights);
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
   return (
-    <Card sx={{ display: "flex", margin: "1rem", position: "relative" }}>
+    <Card
+      sx={{
+        display: "flex",
+        flexDirection: isMobile ? "column" : "row",
+        margin: "1rem",
+        position: "relative",
+      }}
+    >
       <Box sx={{ display: "flex", flexDirection: "column", width: "100%" }}>
         <CardContent sx={{ flex: "1 0 auto" }}>
           <Typography
@@ -58,7 +67,7 @@ const HotelroomCard = ({ hotelroom, startDate, endDate, numNights }) => {
               pl: 2,
               fontWeight: "bold",
               position: "absolute",
-              bottom: 0,
+              bottom: isMobile ? 200 : 0,
               left: 0,
               marginBottom: "1rem",
             }}
@@ -71,15 +80,15 @@ const HotelroomCard = ({ hotelroom, startDate, endDate, numNights }) => {
             </Typography>
           </Box>
         </Box>
-        <CardActions sx={{ justifyContent: "flex-end" }}>
-          <Button sizes="small" variations="priamy">
+        <CardActions sx={{ justifyContent: "flex-end", p: 2 }}>
+          <Button size="small" variant="contained" color="primary">
             <HotelroomBookingButton hotelroom={hotelroom} />
           </Button>
         </CardActions>
       </Box>
       <CardMedia
         component="img"
-        sx={{ width: 350 }}
+        sx={{ width: isMobile ? "100%" : 350, height: isMobile ? 200 : "auto" }}
         image={hotelroom.image}
         alt={hotelroom.name}
       />

@@ -5,6 +5,10 @@ const StyledRightImageWrapper = styled.div`
   gap: -1rem;
   display: flex;
   justify-content: space-around;
+
+  @media (max-width: 600px) {
+    flex-direction: column;
+  }
 `;
 
 const StyleImageWrapper = styled.div`
@@ -28,6 +32,12 @@ const StyleCotentWrapper = styled.div`
   align-items: center;
   margin-left: 2rem;
   font-size: 1.2rem;
+
+  @media (max-width: 600px) {
+    width: 80%;
+    margin-left: 3rem;
+    padding: 4rem;
+  }
 `;
 
 const StyleTitle = styled.div`

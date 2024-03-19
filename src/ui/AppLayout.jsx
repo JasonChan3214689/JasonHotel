@@ -10,6 +10,11 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   gap: 3.2rem;
+
+  @media (max-width: 600px) {
+    width: 100%;
+    overflow-x: hidden;
+  }
 `;
 
 const AppLayout = () => {

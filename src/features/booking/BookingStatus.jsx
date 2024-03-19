@@ -13,17 +13,32 @@ const StyledBookingStatusWrapper = styled.div`
 
   box-sizing: border-box;
   font-size: 1rem;
+
+  @media (max-width: 600px) {
+    margin: 1rem;
+    overflow-x: hidden;
+  }
 `;
 
 const StyledBookingStatusContent = styled.div`
   display: flex;
   padding: 0.5rem;
   align-items: center;
+
+  @media (max-width: 600px) {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
 `;
 
 const StyledInput = styled.input`
   max-width: 20%;
   box-sizing: border-box;
+
+  @media (max-width: 600px) {
+    max-width: 100%;
+    margin: 0.2rem;
+  }
 `;
 
 const StyledinputWrapper = styled.div`
@@ -31,6 +46,10 @@ const StyledinputWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+
+  @media (max-width: 600px) {
+    margin: 0.2rem;
+  }
 `;
 
 const StyledPeopleWrapper = styled.div`
@@ -38,6 +57,11 @@ const StyledPeopleWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+
+  @media (max-width: 600px) {
+    margin: 0.2rem;
+    flex-basis: 100%;
+  }
 `;
 
 const StyledTitleWrapper = styled.div`
@@ -47,6 +71,10 @@ const StyledTitleWrapper = styled.div`
   padding: 0.5rem;
   color: var(--color-white-600);
   background-color: var(--color-black-600);
+
+  @media (max-width: 600px) {
+    flex-basis: 100%;
+  }
 `;
 
 const BookingStatus = ({ setShowSpinner }) => {
